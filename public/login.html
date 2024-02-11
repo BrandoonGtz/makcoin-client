@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>MakCoin - Login</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+<div data-bind="if: isShowError()">
+    <div class="error-msg">
+        Usuario o Contraseña incorrectos
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row align-items-center" style="height: 100vh;">
+        <div class="col-md-6 text-center mx-auto"><img class="img-fluid" src="/assets/img/coin.png" width="96">
+            <h1 class="display-3 text-white">MakCoin</h1>
+            <p class="h2 text-white">Bienvenido</p>
+            <form data-bind="submit: tryToLogin">
+                <div class="row gy-3 row-cols-1">
+                    <div class="col">
+                        <div class="input-field">
+                            <i class="far fa-user"></i>
+                            <input type="email" data-bind="textInput: email, enable: !isDataSending()"
+                                   placeholder="Usuario">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-field"
+                        ><i class="fas fa-lock"></i>
+                            <input type="password"
+                                   placeholder="Contraseña"
+                                   data-bind="attr: {type: isShowPsw()? 'text': 'password'}, textInput: password, enable: !isDataSending()">
+                            <i class="far fa-eye" data-bs-toggle="tooltip" data-bss-tooltip=""
+                               data-bs-placement="bottom" title="Mostrar contraseña"
+                               data-bind="class: isShowPsw()? notShowClass : showPswClass, click: toggleShowPsw(false)"
+                               style="cursor: pointer;"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button class="login-btn" type="submit" data-bind="enable: !isDataSending()">Entrar</button>
+                    </div>
+                </div>
+            </form>
+            <div class="row my-3">
+                <div class="col"><a href="#" style="color: #11e47f;"><br>¿olvidaste tu contraseña?</a></div>
+                <div class="col"><a role="button" class="register-btn" href="/register.html">Registarse</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-bubbles"></div>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/bs-init.js"></script>
+<script src="/assets/js/knockout-min.js"></script>
+<script src="/assets/js/axios.js" type="module"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/apiAuth.js"></script>
+
+</body>
+
+</html>

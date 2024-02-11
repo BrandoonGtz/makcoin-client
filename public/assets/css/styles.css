@@ -1,0 +1,223 @@
+:root {
+    --bshw-4: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    --teal-cool: rgb(32, 201, 151);
+}
+
+body {
+    background-color: #00379c;
+}
+
+.bg-bubbles {
+    background-image: url("/assets/img/bg.png");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.input-field {
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    border-radius: 32px;
+    align-items: center;
+    padding: 0 16px;
+    column-gap: 10px;
+}
+
+.input-field input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    height: 54px;
+    flex-grow: 1;
+}
+
+.input-field input::placeholder {
+    color: var(--bs-body-color);
+}
+
+.login-btn {
+    width: 100%;
+    border-radius: 32px;
+    height: 54px;
+    background-color: rgba(32, 201, 151, 0.6);
+    border: 2px solid var(--bs-teal);
+    color: var(--bs-white);
+    transition: all 480ms ease;
+}
+
+.register-btn {
+    width: 100%;
+    border-radius: 32px;
+    height: 44px;
+    background-color: rgb(227, 193, 97);
+    border: 2px solid #f5e48e;
+    color: var(--bs-black);
+    transition: all 480ms ease;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.login-btn:hover {
+    border: 2px solid #11e47f;
+    background-color: rgba(32, 201, 151, 0.81);
+}
+
+.register-btn:hover {
+    background-color: rgb(255, 203, 58);
+    border: 2px solid #fcf54c;
+    color: #333;
+}
+
+.container-section {
+    background-color: rgb(115, 145, 201);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: var(--bshw-4);
+    margin: 16px 0;
+}
+
+@media (min-width: 768px) {
+    .container-section {
+        margin: 0;
+    }
+}
+
+.section-img {
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    margin-top: -66px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: var(--bs-white);
+}
+
+@media (min-width: 768px) {
+    .section-img {
+        margin-bottom: 70px;
+    }
+}
+
+.section-img > i, .section-img > img {
+    background-color: rgb(115, 145, 201);
+    padding: 16px;
+    border-radius: 54px;
+    /*box-shadow: var(--bshw-4);*/
+    display: flex;
+    width: 88px;
+    height: 88px;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondary-text {
+    color: var(--teal-cool);
+}
+
+.card-actions {
+    margin-top: 12px;
+}
+
+@media (min-width: 768px) {
+    .card-actions {
+        margin-top: 78px;
+    }
+}
+
+.product-list {
+    max-height: 264px;
+    overflow-y: auto;
+}
+
+.product-item {
+    height: 48px;
+    border-bottom: solid 0.2pt var(--bs-gray-600);
+    padding: 4px 12px;
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+}
+
+.product-item span {
+    color: white;
+}
+
+.product-avatar {
+    background-color: var(--bs-purple);
+    display: block;
+    padding: 4px 12px;
+    border-radius: 32px;
+}
+
+.main-content {
+    height: 100vh;
+    padding: 128px 0;
+}
+
+.footer {
+    padding: 24px;
+}
+
+@media (min-width: 768px) {
+    .footer {
+        padding: 0;
+    }
+}
+
+.otp-input {
+    width: 40px;
+    height: 48px;
+    border-radius: 6px;
+    outline: none;
+    text-align: center;
+    border: 2px solid var(--bs-indigo);
+}
+
+#hr-div {
+    font-size: 20px;
+    letter-spacing: -3px;
+    font-weight: 800;
+}
+
+@media (min-width: 760px) {
+    .otp-input {
+        width: 48px;
+        height: 54px;
+    }
+}
+
+.indigo-bg {
+    background-color: var(--bs-indigo);
+    color: #fff;
+}
+
+.error-msg {
+    background-color: var(--bs-danger);
+    opacity: 0.8;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    width: 100vw;
+    padding: 24px;
+}
+
+@media (min-width: 760px) {
+    .error-msg {
+        top: 24px;
+        width: 350px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 16px;
+    }
+
+}

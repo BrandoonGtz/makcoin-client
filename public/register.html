@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>MakCoin - Registro</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+<div class="bg-bubbles"></div>
+<div data-bind="if: errorMsg()">
+    <div class="error-msg" data-bind="text: msg()">
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row align-items-center" style="height: 100vh;">
+        <div class="col-md-6 text-center mx-auto"><img class="img-fluid" src="/assets/img/coin.png" width="96">
+            <h1 class="display-3 text-white">MakCoin</h1>
+            <p class="h2 text-white">Registro de Usuario</p>
+            <form data-bind="submit: register">
+                <div class="row gy-3 row-cols-1">
+                    <div class="col">
+                        <div class="input-field">
+                            <i class="far fa-user"></i>
+                            <input type="text" required data-bind="textInput: name, enable: !isDataSending()"
+                                   placeholder="Nombre">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-field">
+                            <i class="far fa-envelope"></i>
+                            <input type="email" required data-bind="textInput: email, enable: !isDataSending()"
+                                   placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" required placeholder="Contraseña"
+                                   data-bind="attr: {type: isShowPsw()? 'text': 'password'}, textInput: psw, enable: !isDataSending()">
+                            <i class="far fa-eye" data-bs-toggle="tooltip" data-bss-tooltip=""
+                               data-bs-placement="bottom" title="Mostrar contraseña" style="cursor: pointer;"
+                               data-bind="class: isShowPsw()? notShowClass : showPswClass, click: toggleShowPsw(false)">
+
+                            </i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" required
+                                   placeholder="Confirmar contraseña"
+                                   data-bind="attr: {type: isShowConfirmPsw()? 'text': 'password'}, textInput: confirmPsw, enable: !isDataSending()">.
+                            <i class="far fa-eye" data-bs-toggle="tooltip" data-bss-tooltip=""
+                               data-bs-placement="bottom" title="Mostrar contraseña" style="cursor: pointer;"
+                               data-bind="class: isShowConfirmPsw()? notShowClass : showPswClass, click: toggleShowPsw(true)">
+
+                            </i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button class="login-btn" type="submit" data-bind="enable: !isDataSending()">Registrar</button>
+                    </div>
+                </div>
+            </form>
+            <div class="row my-3">
+                <div class="col">
+                    <a href="/login.html" style="color: #11e47f;"><br>¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/bs-init.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/knockout-min.js" type="module"></script>
+<script src="/assets/js/axios.js" type="module"></script>
+<script src="/assets/js/apiRegisterAuth.js"></script>
+</body>
+
+</html>

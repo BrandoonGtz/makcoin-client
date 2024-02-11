@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>MakcoinClient</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+<div class="bg-bubbles" style="height: 107vh;"></div>
+<div class="container">
+    <div class="row g-0 justify-content-center gap-4 main-content">
+        <div class="col-md-3 container-section">
+            <div class="section-img"><i class="far fa-user-circle"></i></div>
+            <div class="row text-center flex-column">
+                <div class="col">
+                    <p class="lead fs-3 fw-bold text-white" data-bind="text: displayName()"></p>
+                    <p class="fw-semibold text-white" data-bind="text: email()"></p>
+                    <p class="text-white">
+                        Fecha de Registro : <span data-bind="text: createdAt()"></span>
+                    </p>
+                </div>
+                <div class="col my-4">
+                    <button class="btn btn-danger" data-bind="click: logout">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 container-section">
+            <div class="section-img"><img src="/assets/img/coin.png"></div>
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-5 fw-semibold text-white flex-grow-1">Crédito Disponible:&nbsp;</span>
+                        <span class="fs-4 fw-bold text-white" data-bind="text: '$' + totalBalance()"></span>
+                    </div>
+                    <div class="mb-3"><span class="fs-5 fw-lighter text-white"><strong>Ingresos:</strong><br></span>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="progress flex-grow-1 my-2">
+                                <div class="progress-bar bg-success progress-bar-striped" aria-valuenow="10"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span
+                                        class="visually-hidden">100%</span></div>
+                            </div>
+                            <span class="fs-5 text-white" data-bind="text: '$' + income()"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3"><span class="fs-5 fw-lighter text-white"><strong>Gastos:</strong><br></span>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="progress flex-grow-1 my-2">
+                                <div class="progress-bar bg-warning progress-bar-striped" aria-valuenow="50"
+                                     aria-valuemin="0" aria-valuemax="100" data-bind="style: {width: billsWidth()}"><span
+                                        class="visually-hidden">50%</span></div>
+                            </div>
+                            <span class="fs-5 text-white" data-bind="text: '$-' + bills()"></span>
+                        </div>
+                    </div>
+                    <div class="float-end card-actions">
+                        <button class="btn btn-success" type="button" data-bs-target="#modal-1" data-bs-toggle="modal">
+                            <i class="fas fa-plus"></i>&nbsp; Agregar Crédito<br></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 container-section">
+            <div class="section-img"><i class="fas fa-shopping-cart" style="font-size: 34px;color: var(--bs-red);"></i>
+            </div>
+            <div class="row flex-column gap-3">
+                <div class="col">
+                    <p class="lead fs-5 text-white"><i class="fas fa-history"></i>&nbsp;Historial de Productos</p>
+                </div>
+                <div class="col product-list">
+                    <div class="row row-cols-1" data-bind="foreach: productos">
+                        <div class="col product-item">
+                            <span class="product-avatar" data-bind="text: nombre.charAt(0).toUpperCase()"></span>
+                            <span class="flex-grow-1" data-bind="text: nombre"></span>
+                            <span class="fs-5 fw-bold" data-bind="text: '$-' + precio"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col text-end">
+                    <button class="btn indigo-bg" type="button" data-bs-target="#modal-2" data-bs-toggle="modal"><i
+                            class="fas fa-shopping-basket"></i>&nbsp;Comprar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 footer"></div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Agregar Crédito</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div data-bind="ifnot: validCode()">
+                    <p class="lead fs-5 fw-semibold">Código de crédito:</p>
+                    <div class="d-flex justify-content-between align-items-lg-center gap-2 gap-md-0" id="otp-input">
+                        <input data-bind="enable: !isLoadingData()" type="text" class="otp-input" inputmode="numeric"
+                               placeholder="0">
+                        <input data-bind="enable: !isLoadingData()" type="text" class="otp-input" inputmode="numeric"
+                               placeholder="0">
+                        <input data-bind="enable: !isLoadingData()" type="text" class="otp-input" inputmode="numeric"
+                               placeholder="0">
+                        <input data-bind="enable: !isLoadingData()" type="text" class="otp-input" inputmode="numeric"
+                               placeholder="0">
+                        <input data-bind="enable: !isLoadingData()" type="text" class="otp-input" inputmode="numeric"
+                               placeholder="0">
+                    </div>
+                    <input name="otp" hidden="hidden" class="visually-hidden">
+                    <p class="text-danger" data-bind="text: errorMsg()"></p>
+                </div>
+                <div class="d-lg-flex align-items-lg-center" data-bind="if: validCode()" style="color: #4caf50;">
+                    <span class="fw-semibold flex-grow-1">Código Válido por: </span>
+                    <span class="fs-3 fw-bold">$<span data-bind="text: creditQuantity"></span></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" type="button" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn indigo-bg" type="button"
+                        data-bind="enable: !isLoadingData(), click: tryToAddCredit, text: validCode()? 'Agregar' : 'Verificar'">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+    <div class="modal-dialog modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Comprar Producto</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div data-bind="ifnot: validProductCode()">
+                    <p class="lead fs-5 fw-semibold">Código de producto:</p>
+                    <div class="d-flex justify-content-between align-items-lg-center gap-2 gap-md-0"
+                         id="product-otp-input">
+                        <input data-bind="enable: !isLoadingProductData()" type="text" class="otp-input"
+                               inputmode="numeric"
+                               placeholder="0">
+                        <input data-bind="enable: !isLoadingProductData()" type="text" class="otp-input"
+                               inputmode="numeric"
+                               placeholder="0">
+                        <input data-bind="enable: !isLoadingProductData()" type="text" class="otp-input"
+                               inputmode="numeric"
+                               placeholder="0">
+                        <input data-bind="enable: !isLoadingProductData()" type="text" class="otp-input"
+                               inputmode="numeric"
+                               placeholder="0">
+                        <input data-bind="enable: !isLoadingProductData()" type="text" class="otp-input"
+                               inputmode="numeric"
+                               placeholder="0">
+                    </div>
+                    <input name="product-otp" hidden="hidden" class="visually-hidden">
+                    <p class="text-danger" data-bind="text: productErrorMsg()"></p>
+                </div>
+                <div class="d-flex flex-column" data-bind="if: validProductCode()">
+                    <span class="fw-semibold flex-shrink-1 flex-fill">Producto identificado:&nbsp;</span>
+                    <div class="d-flex"><span class="fs-3 fw-bold flex-grow-1" data-bind="text: productName()"></span><span
+                            class="fs-3 fw-bold text-danger" data-bind="text: '$'+productPrice()"></span></div>
+                    <p class="text-danger" data-bind="text: buyProductErrorMsg()"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancelar</button>
+                <button data-bind="enable: !isLoadingProductData(), click: tryToBuyProduct, text: validProductCode()? 'Comprar':'Verificar'"
+                        class="btn indigo-bg" type="button"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/bootstrap/js/bootstrap.min.js" type="module"></script>
+<script src="/assets/js/bs-init.js"></script>
+<script src="/assets/js/knockout-min.js"></script>
+<script src="/assets/js/axios.js" type="module"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/dashboard.js"></script>
+<script src="/assets/js/otp.js"></script>
+
+</body>
+
+</html>
